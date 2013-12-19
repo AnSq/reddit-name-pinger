@@ -27,19 +27,16 @@ for a in range(0,len(chars)):
 				if username == start_at:
 					started = True
 				if started:
-					r = requests.head("http://www.reddit.com/user/" + username + "/.json", headers=headers)
+					r = requests.get("http://www.reddit.com/api/username_available.json?user=" + username, headers=headers)
 					if r.status_code == 200:
-						print "#  " + username
-					elif r.status_code == 404:
-						print "   " + username
+						if r.text == "false":
+							print "#  " + username
+							file_taken.write(username + "\n")
+						elif r.text == "true":
+							print "   " + username
+							file_available.write(username + "\n")
 					else:
 						print "-  " + username + " " + str(r.status_code)
-
-					if r.status_code == 200:
-						file_taken.write(username + "\n")
-					elif r.status_code == 404:
-						file_available.write(username + "\n")
-					else:
 						file_fail.write(str(r.status_code) + ": " + username + "\n")
 
 					num += 1
