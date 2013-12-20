@@ -11,6 +11,10 @@ from getpass import getpass
 start_at = sys.argv[1]
 end_at = sys.argv[2]
 
+send = True
+if len(sys.argv) != 6:
+	send = False
+
 fname_available = "names_available_" + start_at + "-" + end_at + ".txt"
 fname_taken = "names_taken_" + start_at + "-" + end_at + ".txt"
 fname_fail = "names_failed_" + start_at + "-" + end_at + ".txt"
@@ -19,12 +23,12 @@ file_available = open(fname_available, "w")
 file_taken = open(fname_taken, "w")
 file_fail = open(fname_fail, "w")
 
-password = getpass()
+password = ""
+if send:
+	password = getpass()
 
 
 def main():
-
-
 	chars = string.ascii_lowercase + string.digits + "-_"
 	agent = "name pinger 1.2 by /u/AnSq"
 	headers = {"User-Agent": agent}
@@ -81,7 +85,8 @@ def quit():
 	file_taken.close()
 	file_fail.close()
 
-	mail()
+	if send:
+		mail()
 
 	exit()
 
