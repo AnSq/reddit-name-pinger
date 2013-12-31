@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import os
+import convert
 
 path_available = "data/available"
 path_taken = "data/taken"
@@ -21,7 +22,7 @@ for fname in os.listdir(path_available):
 			s.add(name)
 			available.append(name)
 	file.close()
-	available.sort()
+	#available.sort()
 
 for fname in os.listdir(path_taken):
 	path = os.path.join(path_taken, fname)
@@ -34,7 +35,7 @@ for fname in os.listdir(path_taken):
 			s.add(name)
 			taken.append(name)
 	file.close()
-	taken.sort()
+	#taken.sort()
 
 for fname in os.listdir(path_failed):
 	path = os.path.join(path_failed, fname)
@@ -47,10 +48,10 @@ for fname in os.listdir(path_failed):
 			s.add(name)
 			failed.append(name)
 	file.close()
-	failed.sort()
+	#failed.sort()
 
 all = available + taken + failed
-all.sort()
+all.sort(key=convert.to_num)
 
 print "\n===================\n"
 print "Available: %d" % len(available)
