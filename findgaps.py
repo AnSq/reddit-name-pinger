@@ -51,6 +51,7 @@ for fname in os.listdir(path_failed):
 	#failed.sort()
 
 all = available + taken + failed
+all = list(set(all))
 all.sort(key=convert.to_num)
 
 print "\n===================\n"
@@ -60,3 +61,14 @@ print "Failed:    %d" % len(failed)
 print "Sum:       %d" % len(all)
 print "Total:     %d" % pow(38,4)
 print "Progress:  %.2f%%" % (100.0 * ((len(all) + 0.0) / pow(38,4)))
+print "\n===================\n"
+
+gaps = open("gaps.txt", "w")
+for i in range(0, len(all) - 1):
+	curr = convert.to_num(all[i])
+	next = convert.to_num(all[i+1])
+	if next != curr + 1:
+		str = "%s %s\n" % (convert.after(all[i]), all[i+1])
+		print str,
+		gaps.write(str)
+gaps.close()
