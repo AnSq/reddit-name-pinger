@@ -81,8 +81,8 @@ def plot_data(img_name, fname, color, fail=False):
 
 	for line in file:
 		name = line.strip()
-		if (fail):
-			name = name.split(":")[1].strip()
+		#if (fail):
+		#	name = name.split(":")[1].strip()
 		row = convert.to_num(name[:2])
 		col = convert.to_num(name[2:])
 		draw.point((col, row), fill=color)
