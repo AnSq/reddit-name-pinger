@@ -40,7 +40,7 @@ file_taken     = open(fname_taken, "w")
 file_fail      = open(fname_fail, "w")
 
 chars = string.ascii_lowercase + string.digits + "-_"
-agent = "name pinger 1.4 by /u/AnSq"
+agent = "name pinger 1.4.1 by /u/AnSq"
 headers = {"User-Agent": agent}
 
 
@@ -95,14 +95,15 @@ def main():
 					started = True
 				continue
 			ping(username)
-			num += 1
-			if num % 5 == 0:
-				time.sleep(10) #ratelimit
-			if num % len(chars) == 0:
-				flush()
-				print "This batch is processing the file '%s' and outputting to '%s'." % (input_file, output_id)
-			if num == 5 * len(chars):
-				num = 0
+			if started:
+				num += 1
+				if num % 5 == 0:
+					time.sleep(10) #ratelimit
+				if num % len(chars) == 0:
+					flush()
+					print "This batch is processing the file '%s' and outputting to '%s'." % (input_file, output_id)
+				if num == 5 * len(chars):
+					num = 0
 		input.close()
 
 
