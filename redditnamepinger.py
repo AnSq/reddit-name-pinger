@@ -28,16 +28,19 @@ if mode == "sequential":
 	fname_taken     = "names_taken_%s-%s.txt"     % (start_at, end_at)
 	fname_fail      = "names_failed_%s-%s.txt"    % (start_at, end_at)
 elif mode == "file":
-	fname_available = "names_available_%s.txt" % output_id
-	fname_taken     = "names_taken_%s.txt"      % output_id
-	fname_fail      = "names_failed_%s.txt"    % output_id
+	start_at = ""
+	if len(sys.argv) >= 4:
+		start_at = sys.argv[3]
+	fname_available = "names_available_%s_%s.txt" % (start_at, output_id)
+	fname_taken     = "names_taken_%s_%s.txt"     % (start_at, output_id)
+	fname_fail      = "names_failed_%s_%s.txt"    % (start_at, output_id)
 
 file_available = open(fname_available, "w")
 file_taken     = open(fname_taken, "w")
 file_fail      = open(fname_fail, "w")
 
 chars = string.ascii_lowercase + string.digits + "-_"
-agent = "name pinger 1.3.1 by /u/AnSq"
+agent = "name pinger 1.4 by /u/AnSq"
 headers = {"User-Agent": agent}
 
 
@@ -82,8 +85,15 @@ def main():
 	elif mode == "file":
 		num = 0
 		input = open(input_file, "r")
+		started = False
+		if start_at == "":
+			started = True
 		for line in input:
 			username = line.strip()
+			if not started:
+				if username == start_at:
+					started = True
+				continue
 			ping(username)
 			num += 1
 			if num % 5 == 0:
