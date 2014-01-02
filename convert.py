@@ -25,11 +25,21 @@ def main():
 	if len(sys.argv) == 2:
 		print to_num(sys.argv[1])
 	elif len(sys.argv) == 3:
-		print diff_days(sys.argv[1], sys.argv[2])
+		print diff_hours(sys.argv[1], sys.argv[2])
 
 
 def diff_days(start, end):
 	return (to_num(end) - to_num(start)) / 43200.0
+
+
+def diff_hours(start, end):
+	return (to_num(end) - to_num(start)) / 1800.0
+
+
+def percent_complete(start, end, current):
+	range = to_num(end) - to_num(start)
+	pos = to_num(current) - to_num(start)
+	return 100.0 * pos / range
 
 
 def from_num(n):

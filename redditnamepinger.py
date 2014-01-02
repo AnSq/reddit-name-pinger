@@ -6,6 +6,8 @@ import sys
 import smtplib
 from base64 import urlsafe_b64encode as url_b64
 
+import convert
+
 
 mode = "sequential"
 if sys.argv[1] == "$":
@@ -35,7 +37,7 @@ file_taken     = open(fname_taken, "w")
 file_fail      = open(fname_fail, "w")
 
 chars = string.ascii_lowercase + string.digits + "-_"
-agent = "name pinger 1.3 by /u/AnSq"
+agent = "name pinger 1.3.1 by /u/AnSq"
 headers = {"User-Agent": agent}
 
 
@@ -43,6 +45,7 @@ def main():
 	if mode == "sequential":
 		started = False
 		num = 0
+		username = ""
 
 		for a in range(0,len(chars)):
 			A = chars[a]
@@ -71,6 +74,8 @@ def main():
 					if started:
 						flush()
 						print "This batch is processing '%s' to '%s'." % (start_at, end_at)
+						print "%.2f%% complete. %.2f hours remaining." \
+						% (convert.percent_complete(start_at, end_at, username), convert.diff_hours(username, end_at))
 
 		quit()
 
