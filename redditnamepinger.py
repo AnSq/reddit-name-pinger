@@ -9,6 +9,10 @@ from base64 import urlsafe_b64encode as url_b64
 import convert
 
 
+chars = string.ascii_lowercase + string.digits + "-_"
+agent = "name pinger 1.4.1 by /u/AnSq"
+headers = {"User-Agent": agent}
+
 mode = "sequential"
 if sys.argv[1] == "$":
 	mode = "file"
@@ -38,10 +42,6 @@ elif mode == "file":
 file_available = open(fname_available, "w")
 file_taken     = open(fname_taken, "w")
 file_fail      = open(fname_fail, "w")
-
-chars = string.ascii_lowercase + string.digits + "-_"
-agent = "name pinger 1.4.1 by /u/AnSq"
-headers = {"User-Agent": agent}
 
 
 def main():
