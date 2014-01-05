@@ -105,6 +105,7 @@ def main():
 				if num == 5 * len(chars):
 					num = 0
 		input.close()
+		quit()
 
 
 def ping(username):

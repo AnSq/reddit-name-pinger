@@ -1,4 +1,5 @@
 *.txt
 *.png
 *.pyc
+*.zip
 setup/
