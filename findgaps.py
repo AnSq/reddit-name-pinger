@@ -31,9 +31,7 @@ def main():
 				s.add(name)
 				available.append(name)
 		file.close()
-		available = list(set(available))
 		available.sort()
-		write_list(available, file_out_available)
 
 	for fname in os.listdir(path_taken):
 		num_taken += 1
@@ -47,9 +45,7 @@ def main():
 				s.add(name)
 				taken.append(name)
 		file.close()
-		taken = list(set(taken))
 		taken.sort()
-		write_list(taken, file_out_taken)
 
 	for fname in os.listdir(path_failed):
 		num_failed += 1
@@ -63,13 +59,49 @@ def main():
 				s.add(name)
 				failed.append(name)
 		file.close()
-		failed = list(set(failed))
 		failed.sort()
-		write_list(failed, file_out_failed)
+
+	print "\n===================\n"
+
+	s = len(available)
+	s_available = set(available)
+	print "%d duplicate names removed from available." % (s - len(s_available))
+
+	s = len(taken)
+	s_taken     = set(taken)
+	print "%d duplicate names removed from taken." % (s - len(s_taken))
+
+	s = len(failed)
+	s_failed    = set(failed)
+	print "%d duplicate names removed from failed." % (s - len(s_failed))
+
+	s = len(s_available)
+	s_available -= s_taken
+	print "%d taken names removed from available." % (s - len(s_available))
+
+	s = len(s_failed)
+	s_failed    -= s_available
+	print "%d available names removed from failed." % (s - len(s_failed))
+
+	s = len(s_failed)
+	s_failed    -= s_taken
+	print "%d taken names removed from failed." % (s - len(s_failed))
+
+	available = list(s_available)
+	taken     = list(s_taken)
+	failed    = list(s_failed)
+
+	write_list(available, file_out_available)
+	write_list(taken, file_out_taken)
+	write_list(failed, file_out_failed)
 
 	num_all = num_available + num_taken + num_failed
 	all = available + taken + failed
+
+	s = len(all)
 	all = list(set(all))
+	print "%d duplicate names removed from all (this should be 0)." % (s - len(all))
+
 	all.sort(key=convert.to_num)
 
 	print "\n===================\n"
