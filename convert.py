@@ -4,6 +4,7 @@ import sys
 
 table = {}
 chars = string.ascii_lowercase + string.digits + "-_"
+#chars = string.ascii_lowercase
 
 
 def init():
@@ -17,7 +18,11 @@ def to_num(name):
 	total = 0
 	for i in range(0, len(name)):
 		total *= len(chars)
-		total += table[name[i]]
+		if name[i] in table:
+			total += table[name[i]]
+		else:
+			total = -1
+			break
 	return total
 
 

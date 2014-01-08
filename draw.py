@@ -61,9 +61,10 @@ def plot_data(img_name, fname, color):
 
 	for line in file:
 		name = line.strip()
-		row = convert.to_num(name[:2])
-		col = convert.to_num(name[2:])
-		draw.point((col, row), fill=color)
+		row = convert.to_num(name[:2]) #first two chars
+		col = convert.to_num(name[2:]) #last two chars
+		if row != -1 and col != -1:
+			draw.point((col, row), fill=color)
 
 	file.close()
 	img.save(img_name)
