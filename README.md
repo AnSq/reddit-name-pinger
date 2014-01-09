@@ -1,6 +1,6 @@
 # reddit-name-pinger
 
-reddit-name-pinger is a simple script to determine what 4-character reddit usernames are taken and what's available.
+reddit-name-pinger is a simple script to determine what 4-character reddit usernames are taken and what's available. It was inspired by [the orign of the name xkcd](https://xkcd.com/about/), [this article on PIN popularity](http://www.datagenetics.com/blog/september32012/), and my own username.
 
 There are 38 valid characters, so there are 38<sup>4</sup> or 2,085,136 valid names. Since reddit limits API requests to 30 per minute, scanning all of them would take just over 48 days if you were doing this on one computer. This is why I have included all of my pre-gathered data in the `data` and `images` folders of this repository. Feel free to play around with it.
 
