@@ -1,0 +1,13 @@
+--- draw.py	2014-01-07 20:51:37.271328010 -0700
++++ draw (copy).py	2014-01-09 11:04:10.843630397 -0700
+@@ -61,8 +61,8 @@
+ 
+ 	for line in file:
+ 		name = line.strip()
+-		row = convert.to_num(name[:2]) #first two chars
+-		col = convert.to_num(name[2:]) #last two chars
++		row = convert.to_num(name[0] + name[2]) #first and third
++		col = convert.to_num(name[1] + name[3]) #second and forth
+ 		if row != -1 and col != -1:
+ 			draw.point((col, row), fill=color)
+ 
